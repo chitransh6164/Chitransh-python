@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chitransh Python to HTML Converter</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #0f0f0f;
+      color: #e0f7fa;
+    }
+
+    header {
+      background-color: #111e2f;
+      padding: 20px;
+      text-align: center;
+      font-size: 2.5rem;
+      color: #00ffe0;
+      box-shadow: 0 4px 8px black;
+    }
+
+    main {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    section {
+      background: #181818;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+    }
+
+    h2 {
+      color: #00ffc8;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    input[type="file"], button {
+      padding: 10px;
+      background: #1e1e1e;
+      color: #00ffe0;
+      border: 1px solid #00ffe7;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      background-color: #101010;
+      color: #00ffe7;
+      border: 1px solid #00ffe7;
+      border-radius: 6px;
+      padding: 10px;
+      font-family: monospace;
+      resize: vertical;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #111e2f;
+      color: #a0fdfd;
+      margin-top: 40px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chitransh Python</h1>
+  </header>
+
+  <main>
+    <section class="upload-section">
+      <h2>1. Upload Your Python File</h2>
+      <input type="file" id="fileInput" accept=".py" />
+      <button onclick="handleFile()">Generate Prompt</button>
+    </section>
+
+    <section class="editor-section">
+      <h2>2. Generated Prompt to HTMLify Code</h2>
+      <textarea id="generatedPrompt" readonly></textarea>
+      <button onclick="copyPrompt()">Copy Prompt</button>
+    </section>
+
+    <section class="chatbot-section">
+      <h2>3. Chatbot: Paste Prompt Below</h2>
+      <iframe
+        src="https://www.chatbase.co/chatbot-iframe/3DlzYb2Sdi2fxf18gCAxL"
+        width="100%"
+        style="height: 700px;"
+        frameborder="0"
+      ></iframe>
+    </section>
+  </main>
+
+  <footer>
+    <p>Crafted with logic and creativity by © 2025 Chitransh Ganesh Yadav</p>
+  </footer>
+
+  <script>
+    function handleFile() {
+      const fileInput = document.getElementById("fileInput");
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select a Python (.py) file.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const code = e.target.result;
+
+        const prompt = `Convert the following Python code into an HTML file.
+
+- The HTML file must include equivalent logic using HTML, inline CSS, and JavaScript.
+- Do not create separate files — everything should be inside a single .html file.
+- Replicate the Python logic and any interface-related functionality.
+- Do not skip comments, convert them where meaningful.
+
+Here is the Python code to convert:
+\n\n${code}`;
+
+        document.getElementById("generatedPrompt").value = prompt;
+      };
+
+      reader.readAsText(file);
+    }
+
+    function copyPrompt() {
+      const promptText = document.getElementById("generatedPrompt");
+      promptText.select();
+      document.execCommand("copy");
+      alert("Prompt copied to clipboard!");
+    }
+  </script>
+</body>
+</html>
